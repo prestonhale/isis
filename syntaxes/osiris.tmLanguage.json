@@ -3,13 +3,7 @@
 	"name": "Osiris",
 	"patterns": [
 		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#logical"
+			"include": "#keyword"
 		},
 		{
 			"include": "#support"
@@ -21,18 +15,27 @@
 			"include": "#meta"
 		},
 		{
+			"include": "#storage"
+		},
+		{
+			"include": "#string"
+		},
+		{
 			"include": "#comment"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.database.osiris",
-				"match": "\\bDB_(\\w)+"
-			},{
-				"name": "keyword.database.osiris",
-				"match": "\\bPROC\n"
-			}]
+		"keyword": {
+			"patterns": [
+				{
+					"name": "keyword.operator.logical.osiris",
+					"match": "NOT\\s"
+				},
+				{
+					"name": "keyword.operator.control.flow.osiris",
+					"match": "(IF|AND|THEN)\n"
+				}
+			]
 		},
 		"comment": {
 			"patterns": [{
@@ -43,23 +46,22 @@
 		"entity": {
 			"patterns": [{
 				"name": "entity.name.function.osiris",
-				"begin": "(?<=PROC\n)",
+				"begin": "((?<=PROC\n)|(?<=QRY\n))",
 				"end": "(?=\\()"
 			}]
 		},
 		"support": {
-			"patterns": [{
-				"name": "support.function.osiris",
-				"match": "\\b\\w+(?=\\()"
-			}]
+			"patterns": [
+				{
+					"name": "support.function.osiris",
+					"match": "\\b\\w+(?=\\()"
+				},{
+					"name": "support.type.osiris",
+					"match": "(?<=\\()\\w+(?=\\))"
+				}
+			]
 		},
-		"logical": {
-			"patterns": [{
-				"name": "logical.osiris",
-				"match": "(AND|THEN)"
-			}]
-		},
-		"strings": {
+		"string": {
 			"name": "string.quoted.double.osiris",
 			"begin": "\"",
 			"end": "\"",
@@ -70,12 +72,58 @@
 				}
 			]
 		},
+		"storage": {
+			"patterns": [
+				{
+					"name": "storage.type.function.osiris",
+					"match": "\\b(PROC|QRY)\n"
+				},
+				{
+					"name": "storage.type.database.osiris",
+					"match": "\\bDB_(\\w)+"
+				}
+			]
+		},
+		"variable": {
+			"patterns": [
+				{
+					"name": "variable.parameter.function.language.osiris",
+					"match": "((\"|\\w+|-)+)",
+					"captures":{
+						"0": {
+							"patterns":[
+								{
+									"include": "#string"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
 		"meta":{
 			"patterns": [
 				{
 					"name": "meta.section.osiris",
 					"match": "INITSECTION"
+				},
+				{
+					"name": "meta.function-call",
+					"match": "\\(.*\\)",
+					"captures":{
+						"0": {
+							"patterns": [
+								{
+									"include": "#support"
+								},
+								{
+									"include": "#variable"
+								}
+							]
+						}
+					}
 				}
+				
 			]
 		}
 	},
