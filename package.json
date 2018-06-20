@@ -2,7 +2,7 @@
     "name": "isis",
     "displayName": "Isis",
     "description": "Provides syntax highlighting for the Osiris scripting language.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "phalewhale",
     "repository": "https://github.com/prestonhale/isis/",
     "engines": {
@@ -12,16 +12,25 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "osiris",
-            "aliases": ["Osiris", "osiris"],
-            "extensions": [".txt"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "osiris",
-            "scopeName": "source.osiris",
-            "path": "./syntaxes/osiris.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "osiris",
+                "aliases": [
+                    "Osiris",
+                    "osiris"
+                ],
+                "extensions": [
+                    ".txt"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "osiris",
+                "scopeName": "source.osiris",
+                "path": "./syntaxes/osiris.tmLanguage.json"
+            }
+        ]
     }
 }
