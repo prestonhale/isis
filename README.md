@@ -1,7 +1,5 @@
 # Isis README
 
-This is 
-
 ## Features
 
 Currently, just adds highlighting to .txt files written in the Osiris scripting language.
@@ -11,3 +9,5 @@ Currently, just adds highlighting to .txt files written in the Osiris scripting 
 Not yet ;)
 
 ## Known Issues
+
+The name of the extension probably puts my on a watch list.
